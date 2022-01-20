@@ -1,0 +1,959 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>HPEMainWindow</class>
+ <widget class="QMainWindow" name="HPEMainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1315</width>
+    <height>504</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Hexo Post Editor</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 255, 255);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout" stretch="16,1">
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="HPESplitter" name="splitter">
+      <property name="styleSheet">
+       <string notr="true">padding: 8px;</string>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="HPEPrettyFrame" name="leftFrame">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="HPEMarkdownEditor" name="markdownField">
+          <property name="styleSheet">
+           <string notr="true">border-radius: 8px;
+background-color: rgb(255, 255, 255);
+selection-background-color: gray;
+
+</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="HPEPrettyFrame" name="rightFrame">
+       <property name="styleSheet">
+        <string notr="true">padding: 0;</string>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QTabWidget" name="tabWidget">
+          <property name="styleSheet">
+           <string notr="true">QTabWidget::pane
+{
+	background-color: white;
+	border-width: 0px;
+}</string>
+          </property>
+          <property name="tabPosition">
+           <enum>QTabWidget::East</enum>
+          </property>
+          <property name="usesScrollButtons">
+           <bool>false</bool>
+          </property>
+          <property name="movable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWebEngineView" name="markdownPreview">
+           <property name="contextMenuPolicy">
+            <enum>Qt::NoContextMenu</enum>
+           </property>
+           <attribute name="title">
+            <string>Markdown Preview</string>
+           </attribute>
+          </widget>
+          <widget class="HPEConvertedMarkdownPreview" name="convertedMarkdownPreview">
+           <attribute name="title">
+            <string>Converted Markdown</string>
+           </attribute>
+          </widget>
+          <widget class="QWebEngineView" name="postPreview">
+           <property name="contextMenuPolicy">
+            <enum>Qt::NoContextMenu</enum>
+           </property>
+           <attribute name="title">
+            <string>Post Preview</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="terminalPage">
+           <attribute name="title">
+            <string>Terminal</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="loggerPage">
+           <attribute name="title">
+            <string>Logger</string>
+           </attribute>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="toolBar">
+      <property name="styleSheet">
+       <string notr="true">QPushButton
+{
+	padding: 8px;
+     color: gray;
+     background-color: white;
+     border-style: solid;
+     border-width: 5px;
+     border-radius: 8px;
+     border-color: rgb(208, 208, 208);
+     font: bold 15px;
+}
+
+QPushButton:hover
+{
+	/*border-color: gray;*/
+     color: rgb(255, 255, 255);
+     background-color: rgb(208, 208, 208);
+}</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="lineWidth">
+       <number>0</number>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,1,1,1,1,1,1,0,1,1,1">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>12</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="buttonMDHeading">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>Heading</string>
+         </property>
+         <property name="icon">
+          <iconset resource="HPEResources.qrc">
+           <normaloff>:/icons/resources/icons/ico_heading.png</normaloff>:/icons/resources/icons/ico_heading.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="buttonMDBold">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>Bold</string>
+         </property>
+         <property name="icon">
+          <iconset resource="HPEResources.qrc">
+           <normaloff>:/icons/resources/icons/ico_bold.png</normaloff>:/icons/resources/icons/ico_bold.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="buttonMDItalic">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>Italic</string>
+         </property>
+         <property name="icon">
+          <iconset resource="HPEResources.qrc">
+           <normaloff>:/icons/resources/icons/ico_italic.png</normaloff>:/icons/resources/icons/ico_italic.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="buttonMDUnderline">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>Underline</string>
+         </property>
+         <property name="icon">
+          <iconset resource="HPEResources.qrc">
+           <normaloff>:/icons/resources/icons/ico_underline.png</normaloff>:/icons/resources/icons/ico_underline.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="buttonMDStrike">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>Strike</string>
+         </property>
+         <property name="icon">
+          <iconset resource="HPEResources.qrc">
+           <normaloff>:/icons/resources/icons/ico_strike.png</normaloff>:/icons/resources/icons/ico_strike.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="buttonMDLink">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>Link</string>
+         </property>
+         <property name="icon">
+          <iconset resource="HPEResources.qrc">
+           <normaloff>:/icons/resources/icons/ico_link.png</normaloff>:/icons/resources/icons/ico_link.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="buttonMDImage">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>Image</string>
+         </property>
+         <property name="icon">
+          <iconset resource="HPEResources.qrc">
+           <normaloff>:/icons/resources/icons/ico_image.png</normaloff>:/icons/resources/icons/ico_image.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="buttonMDCode">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>Codes</string>
+         </property>
+         <property name="icon">
+          <iconset resource="HPEResources.qrc">
+           <normaloff>:/icons/resources/icons/ico_codes.png</normaloff>:/icons/resources/icons/ico_codes.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="buttonMDList">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>List</string>
+         </property>
+         <property name="icon">
+          <iconset resource="HPEResources.qrc">
+           <normaloff>:/icons/resources/icons/ico_list.png</normaloff>:/icons/resources/icons/ico_list.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="buttonHexoGenerate">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>Generate</string>
+         </property>
+         <property name="icon">
+          <iconset resource="HPEResources.qrc">
+           <normaloff>:/icons/resources/icons/ico_generate.png</normaloff>:/icons/resources/icons/ico_generate.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="buttonHexoServer">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>Server</string>
+         </property>
+         <property name="icon">
+          <iconset resource="HPEResources.qrc">
+           <normaloff>:/icons/resources/icons/ico_server.png</normaloff>:/icons/resources/icons/ico_server.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="buttonHexoDeploy">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>Deploy</string>
+         </property>
+         <property name="icon">
+          <iconset resource="HPEResources.qrc">
+           <normaloff>:/icons/resources/icons/ico_deploy.png</normaloff>:/icons/resources/icons/ico_deploy.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1315</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFileMenu">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionMenuOpenFile"/>
+    <addaction name="separator"/>
+    <addaction name="actionMenuNewFile"/>
+    <addaction name="separator"/>
+    <addaction name="actionMenuSave"/>
+    <addaction name="actionMenuSaveAs"/>
+    <addaction name="separator"/>
+    <addaction name="actionMenuFullScreen"/>
+    <addaction name="actionMenuExit"/>
+   </widget>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <addaction name="actionMenuFont"/>
+   </widget>
+   <widget class="QMenu" name="menuInfo">
+    <property name="title">
+     <string>Info</string>
+    </property>
+    <addaction name="actionMenuAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuPattern">
+    <property name="title">
+     <string>Pattern</string>
+    </property>
+    <widget class="QMenu" name="menuHeading">
+     <property name="title">
+      <string>Heading</string>
+     </property>
+     <property name="icon">
+      <iconset resource="HPEResources.qrc">
+       <normaloff>:/icons/resources/icons/ico_heading.png</normaloff>:/icons/resources/icons/ico_heading.png</iconset>
+     </property>
+     <addaction name="actionMenuHeading1"/>
+     <addaction name="actionMenuHeading2"/>
+     <addaction name="actionMenuHeading3"/>
+     <addaction name="actionMenuHeading4"/>
+     <addaction name="actionMenuHeading5"/>
+     <addaction name="actionMenuHeading6"/>
+    </widget>
+    <widget class="QMenu" name="menuList">
+     <property name="title">
+      <string>List</string>
+     </property>
+     <property name="icon">
+      <iconset resource="HPEResources.qrc">
+       <normaloff>:/icons/resources/icons/ico_list.png</normaloff>:/icons/resources/icons/ico_list.png</iconset>
+     </property>
+     <addaction name="actionMenuOrderedList"/>
+     <addaction name="actionMenuUnorderedList"/>
+    </widget>
+    <addaction name="menuHeading"/>
+    <addaction name="actionMenuStrong"/>
+    <addaction name="actionMenuItalic"/>
+    <addaction name="actionMenuUnderline"/>
+    <addaction name="actionMenuStrike"/>
+    <addaction name="separator"/>
+    <addaction name="actionMenuLink"/>
+    <addaction name="actionMenuImage"/>
+    <addaction name="actionMenuCodes"/>
+    <addaction name="actionMenuQuote"/>
+    <addaction name="separator"/>
+    <addaction name="menuList"/>
+    <addaction name="actionMenuTable"/>
+    <addaction name="actionMenuHorizontalRule"/>
+   </widget>
+   <widget class="QMenu" name="menuHexo">
+    <property name="title">
+     <string>Hexo</string>
+    </property>
+    <addaction name="actionMenuHexoGenerate"/>
+    <addaction name="actionMenuHexoClean"/>
+    <addaction name="separator"/>
+    <addaction name="actionMenuHexoServer"/>
+    <addaction name="separator"/>
+    <addaction name="actionMenuHexoDeploy"/>
+   </widget>
+   <addaction name="menuFileMenu"/>
+   <addaction name="menuPattern"/>
+   <addaction name="menuHexo"/>
+   <addaction name="menuSettings"/>
+   <addaction name="menuInfo"/>
+  </widget>
+  <action name="actionMenuOpenFile">
+   <property name="icon">
+    <iconset resource="HPEResources.qrc">
+     <normaloff>:/icons/resources/icons/ico_open_file.png</normaloff>:/icons/resources/icons/ico_open_file.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+   <property name="toolTip">
+    <string>open files</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionMenuFont">
+   <property name="icon">
+    <iconset resource="HPEResources.qrc">
+     <normaloff>:/icons/resources/icons/ico_font.png</normaloff>:/icons/resources/icons/ico_font.png</iconset>
+   </property>
+   <property name="text">
+    <string>Font</string>
+   </property>
+  </action>
+  <action name="actionMenuExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionMenuFullScreen">
+   <property name="text">
+    <string>Full Screen</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+F</string>
+   </property>
+  </action>
+  <action name="actionMenuNewFile">
+   <property name="icon">
+    <iconset resource="HPEResources.qrc">
+     <normaloff>:/icons/resources/icons/ico_new_file.png</normaloff>:/icons/resources/icons/ico_new_file.png</iconset>
+   </property>
+   <property name="text">
+    <string>New File</string>
+   </property>
+   <property name="toolTip">
+    <string>New File</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionMenuSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionMenuAbout">
+   <property name="icon">
+    <iconset resource="HPEResources.qrc">
+     <normaloff>:/icons/resources/icons/ico_info.png</normaloff>:/icons/resources/icons/ico_info.png</iconset>
+   </property>
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionMenuItalic">
+   <property name="icon">
+    <iconset resource="HPEResources.qrc">
+     <normaloff>:/icons/resources/icons/ico_italic.png</normaloff>:/icons/resources/icons/ico_italic.png</iconset>
+   </property>
+   <property name="text">
+    <string>Italic</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuUnderline">
+   <property name="icon">
+    <iconset resource="HPEResources.qrc">
+     <normaloff>:/icons/resources/icons/ico_underline.png</normaloff>:/icons/resources/icons/ico_underline.png</iconset>
+   </property>
+   <property name="text">
+    <string>Underline</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+U</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuStrike">
+   <property name="icon">
+    <iconset resource="HPEResources.qrc">
+     <normaloff>:/icons/resources/icons/ico_strike.png</normaloff>:/icons/resources/icons/ico_strike.png</iconset>
+   </property>
+   <property name="text">
+    <string>Strike</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+`</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuLink">
+   <property name="icon">
+    <iconset resource="HPEResources.qrc">
+     <normaloff>:/icons/resources/icons/ico_link.png</normaloff>:/icons/resources/icons/ico_link.png</iconset>
+   </property>
+   <property name="text">
+    <string>Link</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+L</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuImage">
+   <property name="icon">
+    <iconset resource="HPEResources.qrc">
+     <normaloff>:/icons/resources/icons/ico_image.png</normaloff>:/icons/resources/icons/ico_image.png</iconset>
+   </property>
+   <property name="text">
+    <string>Image</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+I</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuCodes">
+   <property name="icon">
+    <iconset resource="HPEResources.qrc">
+     <normaloff>:/icons/resources/icons/ico_codes.png</normaloff>:/icons/resources/icons/ico_codes.png</iconset>
+   </property>
+   <property name="text">
+    <string>Codes</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+C</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuQuote">
+   <property name="icon">
+    <iconset resource="HPEResources.qrc">
+     <normaloff>:/icons/resources/icons/ico_quote.png</normaloff>:/icons/resources/icons/ico_quote.png</iconset>
+   </property>
+   <property name="text">
+    <string>Quote</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+Q</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuTable">
+   <property name="icon">
+    <iconset resource="HPEResources.qrc">
+     <normaloff>:/icons/resources/icons/ico_table.png</normaloff>:/icons/resources/icons/ico_table.png</iconset>
+   </property>
+   <property name="text">
+    <string>Table</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+T</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuHorizontalRule">
+   <property name="icon">
+    <iconset resource="HPEResources.qrc">
+     <normaloff>:/icons/resources/icons/ico_hRule.png</normaloff>:/icons/resources/icons/ico_hRule.png</iconset>
+   </property>
+   <property name="text">
+    <string>Horizontal Rule</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+-</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuOrderedList">
+   <property name="text">
+    <string>Ordered List</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+O</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuUnorderedList">
+   <property name="text">
+    <string>Unordered List</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+U</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuHeading1">
+   <property name="text">
+    <string>Heading 1</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+1</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuHeading2">
+   <property name="text">
+    <string>Heading 2</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+2</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuHeading3">
+   <property name="text">
+    <string>Heading 3</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+3</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuHeading4">
+   <property name="text">
+    <string>Heading 4</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+4</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuHeading5">
+   <property name="text">
+    <string>Heading 5</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+5</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuHeading6">
+   <property name="text">
+    <string>Heading 6</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+6</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuStrong">
+   <property name="icon">
+    <iconset resource="HPEResources.qrc">
+     <normaloff>:/icons/resources/icons/ico_bold.png</normaloff>:/icons/resources/icons/ico_bold.png</iconset>
+   </property>
+   <property name="text">
+    <string>Bold</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+B</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuHexoGenerate">
+   <property name="icon">
+    <iconset resource="HPEResources.qrc">
+     <normaloff>:/icons/resources/icons/ico_generate.png</normaloff>:/icons/resources/icons/ico_generate.png</iconset>
+   </property>
+   <property name="text">
+    <string>Hexo Generate</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+G</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuHexoClean">
+   <property name="icon">
+    <iconset resource="HPEResources.qrc">
+     <normaloff>:/icons/resources/icons/ico_clear.png</normaloff>:/icons/resources/icons/ico_clear.png</iconset>
+   </property>
+   <property name="text">
+    <string>Hexo Clean</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+C</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuHexoServer">
+   <property name="icon">
+    <iconset resource="HPEResources.qrc">
+     <normaloff>:/icons/resources/icons/ico_server.png</normaloff>:/icons/resources/icons/ico_server.png</iconset>
+   </property>
+   <property name="text">
+    <string>Hexo Server</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuHexoDeploy">
+   <property name="icon">
+    <iconset resource="HPEResources.qrc">
+     <normaloff>:/icons/resources/icons/ico_deploy.png</normaloff>:/icons/resources/icons/ico_deploy.png</iconset>
+   </property>
+   <property name="text">
+    <string>Hexo Deploy</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+D</string>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionMenuSaveAs">
+   <property name="text">
+    <string>Save As</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QWebEngineView</class>
+   <extends>QWidget</extends>
+   <header>qwebengineview.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>HPESplitter</class>
+   <extends>QSplitter</extends>
+   <header>hpesplitter.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>HPEPrettyFrame</class>
+   <extends>QFrame</extends>
+   <header>hpeprettyframe.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>HPEMarkdownEditor</class>
+   <extends>QPlainTextEdit</extends>
+   <header>hpemarkdowneditor.h</header>
+  </customwidget>
+  <customwidget>
+   <class>HPEConvertedMarkdownPreview</class>
+   <extends>QWidget</extends>
+   <header>hpeconvertedmarkdownpreview.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="HPEResources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

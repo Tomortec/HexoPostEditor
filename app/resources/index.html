@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<head>
+  <link rel="stylesheet" type="text/css" href="3rdParty/highlight.min.css">
+  <link rel="stylesheet" type="text/css" href="3rdParty/markdown.css">
+  <link rel="stylesheet" href="3rdParty/katex.min.css">
+  <script src="3rdParty/highlight.min.js"></script>
+  <script src="3rdParty/marked.min.js"></script>
+  <script src="3rdParty/katex.min.js"></script>
+  <script src="3rdParty/auto-render.min.js"></script>
+  <script src="qrc:/qtwebchannel/qwebchannel.js"></script>
+</head>
+<body>
+  <style>
+    body {
+      font-family: 'PingFang SC', 'Myriad Pro', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    }
+  </style>
+
+  <div id="placeholder"></div>
+  <script>
+  'use strict';
+
+  var placeholder = document.getElementById('placeholder');
+
+  marked.setOptions({
+    renderer: new marked.Renderer(),
+    highlight: function(code, lang) {
+      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+      return hljs.highlight(code, { language }).value;
+    },
+    langPrefix: 'hljs language-', // highlight.js css expects a top-level 'hljs' class.
+  });
+
+  var updateText = function(text) {
+      placeholder.innerHTML = marked.parse(text);
+      renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+      });
+  }
+
+  new QWebChannel(qt.webChannelTransport,
+    function(channel) {
+      var content = channel.objects.content;
+      updateText(content.text);
+      content.textChanged.connect(updateText);
+    }
+  );
+  </script>
+</body>
+</html>

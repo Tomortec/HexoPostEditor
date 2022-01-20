@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>HPEStartupDialog</class>
+ <widget class="QDialog" name="HPEStartupDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>575</width>
+    <height>375</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Hexo Post Editor</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog
+{
+	background-color: white;
+	color: gray;
+}
+
+QPushButton
+{
+	padding: 4px 12px;
+     color: gray;
+     background-color: white;
+     border-style: solid;
+     border-width: 5px;
+     border-radius: 8px;
+     border-color: rgb(208, 208, 208);
+     font: bold 13px;
+}
+
+QPushButton:hover
+{
+	/*border-color: gray;*/
+     color: rgb(255, 255, 255);
+     background-color: rgb(208, 208, 208);
+}</string>
+  </property>
+  <layout class="QGridLayout" name="centralLayout" rowstretch="2,3">
+   <property name="bottomMargin">
+    <number>24</number>
+   </property>
+   <item row="1" column="0">
+    <widget class="QGroupBox" name="bottomGroupBox">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox
+{
+	border: 4px solid gray; 
+	border-radius: 12px;
+}
+
+QGroupBox::disabled
+{
+	border: 4px solid rgb(235, 235, 235);
+}</string>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>24</number>
+      </property>
+      <property name="leftMargin">
+       <number>24</number>
+      </property>
+      <property name="topMargin">
+       <number>24</number>
+      </property>
+      <property name="rightMargin">
+       <number>24</number>
+      </property>
+      <property name="bottomMargin">
+       <number>24</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="newFileButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>-1</pointsize>
+          <italic>false</italic>
+          <bold>true</bold>
+          <stylestrategy>PreferAntialias</stylestrategy>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="text">
+         <string>New File</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>:/icons/resources/icons/ico_new_file.png</normaloff>:/icons/resources/icons/ico_new_file.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="openFileButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="text">
+         <string>Open File</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>:/icons/resources/icons/ico_open_file.png</normaloff>:/icons/resources/icons/ico_open_file.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>48</width>
+          <height>48</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="topGroupBox">
+     <property name="styleSheet">
+      <string notr="true">QGroupBox
+{
+	border: 4px solid gray; 
+	border-radius: 12px;
+}</string>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <property name="leftMargin">
+       <number>36</number>
+      </property>
+      <property name="rightMargin">
+       <number>36</number>
+      </property>
+      <property name="bottomMargin">
+       <number>12</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: gray</string>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Input your Hexo project directory&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLineEdit" name="dirEdit">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit
+{
+	padding: 0 5px;
+	color: rgb(235, 235, 235);
+	border-bottom: 2px solid rgb(235, 235, 235);
+}
+
+QLineEdit::focus
+{
+	color: gray;
+	border-bottom: 2px solid gray;
+}</string>
+        </property>
+        <property name="frame">
+         <bool>false</bool>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+        <property name="placeholderText">
+         <string>Hexo project directory</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="dirSelector">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
