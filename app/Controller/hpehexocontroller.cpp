@@ -1,11 +1,27 @@
+/**
+ * @file hpehexocontroller.cpp
+ * @brief This file is part of HPEController
+ * @version 1.0.0
+ * @date 2022-01-22
+ * 
+ * @author Tomortec (everything@tomortec.com)
+ * @copyright Copyright © 2021 - 2022 Tomortec.
+ * @website https://tomortec.com
+ * @license GPL v3 (https://www.gnu.org/licenses/gpl-3.0.html)
+*/
+
 #include "hpehexocontroller.h"
 
 #include <iostream>
-#include <cstdarg>
 #include <csignal>
 
+#include "QsLog.h"
+
 #include "Dialogs/hpeprocessingdialog.h"
-#include "Terminal/qterminalprocess.h"
+#include "ThirdParty/Terminal/qterminalprocess.h"
+
+#define HPE_ERROR QLOG_ERROR() << "HPEHexoController: "
+#define HPE_INFO  QLOG_INFO()  << "HPEHexoController: "
 
 HPEHexoController::HPEHexoController(QTerminalProcess *process,
                                      const QDir &targetDir,
@@ -81,17 +97,26 @@ bool HPEHexoController::createPost(const QString &title, const QString &layout)
         //ADD SETTING: strict error processing
         if(!error.isEmpty() && (error.contains("FATAL", Qt::CaseInsensitive) ||
                                 error.contains("ERROR", Qt::CaseInsensitive)))
+        {
             emit commandProcessError(error);
+            HPE_ERROR << error;
+        }
         else if(res.contains("FATAL", Qt::CaseInsensitive) ||
                 res.contains("ERROR", Qt::CaseInsensitive))
+        {
             emit commandProcessError(res);
+            HPE_ERROR << res;
+        }
         else
+        {
             emit processFinished(res, HPEHexoController::CREATE);
+            HPE_INFO << res;
+        }
     });
 
     m_commmadProcess->start(QProcess::ReadOnly);
     emit commandProcessStart();
-    return true;
+    return m_commmadProcess->state() == QProcess::Running;
 }
 
 bool HPEHexoController::generate()
@@ -116,13 +141,14 @@ bool HPEHexoController::launchServer()
 
     m_serverProcess->setArguments(HEXO_ARGUMENTS.value(SERVER));
     m_serverProcess->start(QProcess::ReadOnly);
-    return true;
+    return m_serverProcess->state() == QProcess::Running;
 }
 
 void HPEHexoController::stopServer()
 {
     if(m_serverProcess->state() == QProcess::Running)
-        kill(m_serverProcess->processId(), SIGINT);   //quit server
+        kill(m_serverProcess->processId(), /*csignal::*/SIGINT);   //quit server
+    HPE_INFO << "Server stopped";
 }
 
 bool HPEHexoController::deploy()
@@ -149,9 +175,13 @@ void HPEHexoController::bindingServerEvents()
         QString res(m_serverProcess->readAll());
         if(res.contains("FATAL", Qt::CaseInsensitive) ||
             res.contains("ERROR", Qt::CaseInsensitive))
+        {
             emit serverProcessError(res);
+            HPE_ERROR << res;
+        }
         else
         {
+            // get local host domain
             QRegularExpression sitePattern(".*(http[s]?://localhost:[0-9]{1,5}/?).*");
             QRegularExpressionMatch match = sitePattern.match(res);
             if(match.hasMatch())
@@ -159,7 +189,10 @@ void HPEHexoController::bindingServerEvents()
                 res = match.capturedTexts().at(1);
                 QUrl url(res);
                 if(url.isValid())
+                {
                     emit serverLaunched(res);
+                    HPE_INFO << "Server launched";
+                }
              }
         }
     });
@@ -167,6 +200,7 @@ void HPEHexoController::bindingServerEvents()
     connect(m_serverProcess, &QProcess::readyReadStandardError, this, [this] {
         QString res(m_serverProcess->readAll());
         emit serverProcessError(res);
+        HPE_INFO << res;
     });
 }
 
@@ -183,26 +217,30 @@ void HPEHexoController::checkHexoInstallation()
         {
             m_hexoInstalled = false;
             emit npxNotFound("Error: npx not found");
+            HPE_ERROR << "Error: npx not found";
         }
         else
         {
             m_hexoInstalled = false;
             emit unknownError("Error: Unknown error!!");
+            HPE_ERROR << "Error: Unknown error!!";
         }
     });
     connect(m_commmadProcess, &QProcess::finished, this, [this] {
         QString res = QString(m_commmadProcess->readAllStandardOutput());
         QString error = QString(m_commmadProcess->readAllStandardError());
         if(!error.isEmpty())
-        { m_hexoInstalled = false; emit hexoNotFound("Error" + error); }
+        { m_hexoInstalled = false; emit hexoNotFound("Error" + error); HPE_ERROR << error; }
         else if(res.contains("not found"))
-        { m_hexoInstalled = false; emit hexoNotFound("Not Found Error" + res);  }
+        { m_hexoInstalled = false; emit hexoNotFound("Not Found Error" + res); HPE_ERROR << error; }
         else if(res.contains("hexo <command>"))
-        { m_hexoInstalled = true;  emit hexoEnvironmentChecked(true);  }
+        { m_hexoInstalled = true;  emit hexoEnvironmentChecked(true);
+          HPE_INFO << QString("Hexo environment checked: %1").arg(m_workingDir.absolutePath()); }
         else if(res.isEmpty())
-        { m_hexoInstalled = false; emit hexoNotFound("Error this is not a Hexo projetc dir"); }
+        { m_hexoInstalled = false; emit hexoNotFound("Error: this is not a Hexo project dir");
+          HPE_ERROR << QString("Not a Hexo project dir %1").arg(m_workingDir.absolutePath()); }
         else
-        { m_hexoInstalled = false; emit unknownError("Unknown Error" + res);  }
+        { m_hexoInstalled = false; emit unknownError("Unknown Error" + res); HPE_ERROR << error; }
     });
     m_commmadProcess->start(QProcess::ReadOnly);
     emit commandProcessStart();
@@ -237,16 +275,25 @@ bool HPEHexoController::processCommand(HPEHexoController::COMMAND_TYPE type)
         //ADD SETTING: strict error processing
         if(!error.isEmpty() && (error.contains("FATAL", Qt::CaseInsensitive) ||
                                 error.contains("ERROR", Qt::CaseInsensitive)))
+        {
+            HPE_ERROR << error;
             emit commandProcessError(error);
+        }
         else if(res.contains("FATAL", Qt::CaseInsensitive) ||
                 res.contains("ERROR", Qt::CaseInsensitive))
+        {
+            HPE_ERROR << res;
             emit commandProcessError(res);
+        }
         else
+        {
+            HPE_INFO << res;
             emit processFinished(res, type);
+        }
     });
 
     m_commmadProcess->start(QProcess::ReadOnly);
     emit commandProcessStart();
-    return true;
+    return m_commmadProcess->state() == QProcess::Running;
 }
 

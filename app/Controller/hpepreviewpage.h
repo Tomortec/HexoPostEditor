@@ -37,7 +37,7 @@ public:
     /**
      * @brief Construct an HPEPreviewPage with parent
      * 
-     * @param parent 
+     * @param[in] parent 
     */
     explicit HPEPreviewPage(QObject *parent = nullptr);
     using QWebEnginePage::QWebEnginePage;

@@ -25,6 +25,8 @@
  * An HPEDocument object is used to expose document texts for QWebChannel.
  * Visit {https://doc.qt.io/qt-6/qtwebengine-webenginewidgets-markdowneditor-example.html}{Qt WebEngine Markdown Editor Example}
  * for more information.
+ * 
+ * @note The corresponding web page is app/resources/index.html
 */
 class HPEDocument : public QObject
 {
@@ -36,7 +38,7 @@ public:
     /**
      * @brief Construct an HPEDocument object with parent
      * 
-     * @param parent 
+     * @param[in] parent 
     */
     explicit HPEDocument(QObject *parent = nullptr);
 
@@ -50,7 +52,7 @@ public:
      * 
      * @see QWebChannel
      * 
-     * @param text The text to transfer to JS
+     * @param[in] text The text to transfer to JS
     */
     void setText(const QString &text);
 

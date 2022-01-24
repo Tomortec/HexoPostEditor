@@ -16,7 +16,7 @@
 #include <QCompleter>
 #include <QRegularExpression>
 
-#include "hpehexocontroller.h"
+#include "Controller/hpehexocontroller.h"
 
 
 HPEFileCreatorForm::HPEFileCreatorForm(HPEHexoController* hexoController, QWidget *parent) :

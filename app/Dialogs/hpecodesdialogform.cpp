@@ -1,3 +1,15 @@
+/**
+ * @file hpecodesdialogform.cpp
+ * @brief This file is part of HPEWidgets
+ * @version 1.0.0
+ * @date 2022-01-21
+ * 
+ * @author Tomortec (everything@tomortec.com)
+ * @copyright Copyright © 2021 - 2022 Tomortec.
+ * @website https://tomortec.com
+ * @license GPL v3 (https://www.gnu.org/licenses/gpl-3.0.html)
+*/
+
 #include "hpecodesdialogform.h"
 #include "ui_hpecodesdialogform.h"
 
@@ -5,7 +17,7 @@
 #include <QLineEdit>
 #include <QCompleter>
 
-#include "hpepreviewpage.h"
+#include "Controller/hpepreviewpage.h"
 
 HPECodesDialogForm::HPECodesDialogForm(QWidget *parent) :
     QWidget(parent),

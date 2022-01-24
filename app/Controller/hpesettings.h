@@ -86,8 +86,8 @@ public:
      * @attention This function's defaultValue is just used for overriding.
      * Actually, \l HPESettings::HPE_DEFAULT_SETTINGS has higher priority over defaultValue.
      * 
-     * @param key Should has slash '/' to show hierarchy
-     * @param defaultValue 
+     * @param[in] key Should has slash '/' to show hierarchy
+     * @param[in] defaultValue 
      * @return Stored setting value as QVariant
      * 
      * @see HPESettings::HPE_DEFAULT_SETTINGS
@@ -98,7 +98,7 @@ public:
      * @brief Judges if the current stored value is the same as that stored
      * in HPE_DEFAULT_SETTINGS
      * 
-     * @param key Should has slash '/' to show hierarchy
+     * @param[in] key Should has slash '/' to show hierarchy
      * @return true if the stored setting equals to its default (defined in HPESettings::HPE_DEFAULT_SETTINGS),
      * false otherwise.
     */

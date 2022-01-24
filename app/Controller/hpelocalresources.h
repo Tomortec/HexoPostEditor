@@ -59,7 +59,7 @@ public:
      * @attention This function doesn't ensure the path's correction
      * and the resource's existence.
      * 
-     * @param name local resource's name or relative path
+     * @param[in] name local resource's name or relative path
      * @return local resource's absolute path
     */
     static QString getLocalPathWithName(const QString& name);
@@ -73,7 +73,7 @@ public:
      * @attention This function doesn't ensure the URL's correction
      * and the resource's existence.
      * 
-     * @param name local resource's name or relative path
+     * @param[in] name local resource's name or relative path
      * @return local resource's URL(starting with 'file://' scheme)
      * 
      * @see QUrl::fromLocalFile()

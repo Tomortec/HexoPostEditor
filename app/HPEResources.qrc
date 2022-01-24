@@ -36,6 +36,7 @@
         <file>resources/icons/ico_arrow_down.png</file>
         <file>resources/icons/ico_open_file.png</file>
         <file>resources/icons/ico_new_file.png</file>
+        <file>resources/icons/Icon-Tomortec.png</file>
     </qresource>
     <qresource prefix="/animation">
         <file>resources/anim_processing.gif</file>

@@ -42,8 +42,8 @@ public:
      * @brief Constructs an HPELineNumberArea with editor.
      * The line number area will be mounted on the editor.
      * 
-     * @param editor The editor to be embedded in
-     * @param parent NO MEANING. The parent is editor.
+     * @param[in] editor The editor to be embedded in
+     * @param[in] parent NO MEANING. The parent is editor.
     */
     explicit HPELineNumberArea(HPEMarkdownEditor* editor, QWidget *parent = nullptr);
 

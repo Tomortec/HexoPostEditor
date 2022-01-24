@@ -16,13 +16,13 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-#include "hpesettings.h"
-#include "hpehexocontroller.h"
+#include "Controller/hpesettings.h"
+#include "Controller/hpehexocontroller.h"
 
 #include "hpefileselectorform.h"
 #include "hpefilecreatorform.h"
 
-#include "Terminal/qterminalprocess.h"
+#include "ThirdParty/Terminal/qterminalprocess.h"
 
 HPEStartupDialog::HPEStartupDialog(QWidget *parent) :
     QDialog(parent),

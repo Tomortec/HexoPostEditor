@@ -44,8 +44,8 @@ public:
     /**
      * @brief Construct a beautified frame.
      * 
-     * @param parent 
-     * @param f 
+     * @param[in] parent 
+     * @param[in] f 
      * 
      * @see QFrame::QFrame()
     */

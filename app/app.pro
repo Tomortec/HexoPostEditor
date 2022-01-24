@@ -13,6 +13,7 @@ include(ThirdParty/QsLog/QsLog.pri)
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Dialogs/hpeaboutdialog.cpp \
     Dialogs/hpecodesdialogform.cpp \
     Dialogs/hpedialog.cpp \
     Dialogs/hpefilecreatorform.cpp \
@@ -23,23 +24,24 @@ SOURCES += \
     Dialogs/hpeprocessingdialog.cpp \
     Dialogs/hpestartupdialog.cpp \
     Dialogs/hpetabledialogform.cpp \
-    Terminal/qterminalprocess.cpp \
-    Terminal/qterminalwidget.cpp \
-    hpeconvertedmarkdownpreview.cpp \
-    hpedocument.cpp \
-    hpehexocontroller.cpp \
-    hpelinenumberarea.cpp \
-    hpelocalresources.cpp \
-    hpemarkdowneditor.cpp \
-    hpeprettyframe.cpp \
-    hpepreviewpage.cpp \
-    hpesettings.cpp \
-    hpesplitter.cpp \
-    hpesyntaxhighlighter.cpp \
+    ThirdParty/Terminal/qterminalprocess.cpp \
+    ThirdParty/Terminal/qterminalwidget.cpp \
+    Editor/hpeconvertedmarkdownpreview.cpp \
+    Controller/hpedocument.cpp \
+    Controller/hpehexocontroller.cpp \
+    Editor/hpelinenumberarea.cpp \
+    Controller/hpelocalresources.cpp \
+    Editor/hpemarkdowneditor.cpp \
+    Frame/hpeprettyframe.cpp \
+    Controller/hpepreviewpage.cpp \
+    Controller/hpesettings.cpp \
+    Frame/hpesplitter.cpp \
+    Editor/hpesyntaxhighlighter.cpp \
     main.cpp \
     hpemainwindow.cpp
 
 HEADERS += \
+    Dialogs/hpeaboutdialog.h \
     Dialogs/hpecodesdialogform.h \
     Dialogs/hpedialog.h \
     Dialogs/hpefilecreatorform.h \
@@ -50,22 +52,23 @@ HEADERS += \
     Dialogs/hpeprocessingdialog.h \
     Dialogs/hpestartupdialog.h \
     Dialogs/hpetabledialogform.h \
-    Terminal/qterminalprocess.h \
-    Terminal/qterminalwidget.h \
-    hpeconvertedmarkdownpreview.h \
-    hpedocument.h \
-    hpehexocontroller.h \
-    hpelinenumberarea.h \
-    hpelocalresources.h \
+    ThirdParty/Terminal/qterminalprocess.h \
+    ThirdParty/Terminal/qterminalwidget.h \
+    Editor/hpeconvertedmarkdownpreview.h \
+    Controller/hpedocument.h \
+    Controller/hpehexocontroller.h \
+    Editor/hpelinenumberarea.h \
+    Controller/hpelocalresources.h \
     hpemainwindow.h \
-    hpemarkdowneditor.h \
-    hpeprettyframe.h \
-    hpepreviewpage.h \
-    hpesettings.h \
-    hpesplitter.h \
-    hpesyntaxhighlighter.h
+    Editor/hpemarkdowneditor.h \
+    Frame/hpeprettyframe.h \
+    Controller/hpepreviewpage.h \
+    Controller/hpesettings.h \
+    Frame/hpesplitter.h \
+    Editor/hpesyntaxhighlighter.h
 
 FORMS += \
+    Dialogs/hpeaboutdialog.ui \
     Dialogs/hpecodesdialogform.ui \
     Dialogs/hpedialog.ui \
     Dialogs/hpefilecreatorform.ui \

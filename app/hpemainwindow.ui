@@ -479,6 +479,8 @@ QPushButton:hover
      <string>Info</string>
     </property>
     <addaction name="actionMenuAbout"/>
+    <addaction name="separator"/>
+    <addaction name="actionMenuHexoHomepage"/>
    </widget>
    <widget class="QMenu" name="menuPattern">
     <property name="title">
@@ -920,6 +922,14 @@ QPushButton:hover
     <string>Ctrl+Shift+S</string>
    </property>
   </action>
+  <action name="actionMenuHexoHomepage">
+   <property name="text">
+    <string>Hexo.io</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F1</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -931,24 +941,24 @@ QPushButton:hover
   <customwidget>
    <class>HPESplitter</class>
    <extends>QSplitter</extends>
-   <header>hpesplitter.h</header>
+   <header>Frame/hpesplitter.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>HPEPrettyFrame</class>
    <extends>QFrame</extends>
-   <header>hpeprettyframe.h</header>
+   <header>Frame/hpeprettyframe.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>HPEMarkdownEditor</class>
    <extends>QPlainTextEdit</extends>
-   <header>hpemarkdowneditor.h</header>
+   <header>Editor/hpemarkdowneditor.h</header>
   </customwidget>
   <customwidget>
    <class>HPEConvertedMarkdownPreview</class>
    <extends>QWidget</extends>
-   <header>hpeconvertedmarkdownpreview.h</header>
+   <header>Editor/hpeconvertedmarkdownpreview.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -1,3 +1,15 @@
+/**
+ * @file hpemarkdowneditor.cpp
+ * @brief This file is part of HPEWidgets
+ * @version 1.0.0
+ * @date 2022-01-23
+ * 
+ * @author Tomortec (everything@tomortec.com)
+ * @copyright Copyright © 2021 - 2022 Tomortec.
+ * @website https://tomortec.com
+ * @license GPL v3 (https://www.gnu.org/licenses/gpl-3.0.html)
+*/
+
 #include "hpemarkdowneditor.h"
 
 #include <QPainter>
@@ -194,14 +206,6 @@ void HPEMarkdownEditor::highlightCurrentLine()
     this->setExtraSelections(extraSelections);
 }
 
-/**
- * @brief HPEMarkdownEditor::updateLineNumberArea
- * @param rect: the part of the editing area that is do be updated (redrawn)
- * @param deltaY: holds the number of pixels the view has been scrolled vertically
- *
- * This slot is invoked when the editors viewport has been scrolled.
- * The QRect given as argument is the part of the editing area that is do be updated (redrawn). deltaY holds the number of pixels the view has been scrolled vertically.
- */
 void HPEMarkdownEditor::updateLineNumberArea(const QRect &rect, int deltaY)
 {
     if (deltaY)

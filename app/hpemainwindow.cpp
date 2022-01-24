@@ -1,18 +1,32 @@
+/**
+ * @file hpemainwindow.cpp
+ * @brief This file is part of HPEWidgets
+ * @version 1.0.0
+ * @date 2022-01-23
+ * 
+ * @author Tomortec (everything@tomortec.com)
+ * @copyright Copyright © 2021 - 2022 Tomortec.
+ * @website https://tomortec.com
+ * @license GPL v3 (https://www.gnu.org/licenses/gpl-3.0.html)
+*/
+
 #include "hpemainwindow.h"
 #include "ui_hpemainwindow.h"
 
-#include "hpedocument.h"
-#include "hpemarkdowneditor.h"
-#include "hpeconvertedmarkdownpreview.h"
-#include "hpepreviewpage.h"
-#include "hpesettings.h"
-#include "hpehexocontroller.h"
-#include "hpelocalresources.h"
+#include "Controller/hpedocument.h"
+#include "Controller/hpepreviewpage.h"
+#include "Controller/hpesettings.h"
+#include "Controller/hpehexocontroller.h"
+#include "Controller/hpelocalresources.h"
+
+#include "Editor/hpemarkdowneditor.h"
+#include "Editor/hpeconvertedmarkdownpreview.h"
 
 #include "Dialogs/hpedialog.h"
 #include "Dialogs/hpestartupdialog.h"
+#include "Dialogs/hpeaboutdialog.h"
 
-#include "Terminal/qterminalwidget.h"
+#include "ThirdParty/Terminal/qterminalwidget.h"
 
 HPEMainWindow::HPEMainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -31,7 +45,6 @@ HPEMainWindow::HPEMainWindow(QWidget *parent)
     HPEPreviewPage* page = new HPEPreviewPage(this);
     ui->markdownPreview->setPage(page);
     ui->markdownPreview->setUrl(HPELocalResources::getLocalURLWithName("index.html"));
-    //ui->markdownPreview->setUrl(QUrl("qrc:/resources/index.html"));
 
     //Listen to the changes in index.html
     //exposed to the JS side by QWebChannel under the name content.
@@ -59,6 +72,7 @@ HPEMainWindow::HPEMainWindow(QWidget *parent)
 
 HPEMainWindow::~HPEMainWindow()
 {
+    QLOG_INFO() << "Quit HexoPostEditor";
     QsLogging::Logger::destroyInstance();
     delete ui;
 }
@@ -105,6 +119,11 @@ void HPEMainWindow::bindingMenuEvents()
     connect(ui->actionMenuSaveAs,    &QAction::triggered, this, &HPEMainWindow::onFileSaveAs);
     connect(ui->actionMenuFullScreen,&QAction::triggered, this, &HPEMainWindow::onMaximize);
     connect(ui->actionMenuExit,      &QAction::triggered, this, &HPEMainWindow::close);
+
+    connect(ui->actionMenuAbout,     &QAction::triggered, this, &HPEMainWindow::onOpenAboutDialog);
+    connect(ui->actionMenuHexoHomepage, &QAction::triggered, this, [=]{
+        QDesktopServices::openUrl(QUrl("https://hexo.io"));
+    });
 }
 
 void HPEMainWindow::bindingEditorEvents()
@@ -214,12 +233,17 @@ void HPEMainWindow::openFile(const QString &path)
         return;
     }
     m_filePath = path;
+
+    if(m_fileDir != QDir(QFileInfo(m_filePath).absoluteDir()))
+        //before opening a new file, call stopServer
+        m_hexoController->stopServer();
+
+
     m_fileDir = QDir(QFileInfo(m_filePath).absoluteDir());
 
-    //before opening a new file, call stopServer
-    m_hexoController->stopServer();
     m_hexoController->setDir(m_fileDir);
     ui->markdownField->setPlainText(f.readAll());
+    QLOG_INFO() << QString("File %1 loaded").arg(m_filePath);
     emit fileLoaded(m_filePath);
 }
 
@@ -338,6 +362,7 @@ void HPEMainWindow::onFileSave()
     str << ui->markdownField->toPlainText();
 
     ui->markdownField->document()->setModified(false);
+    QLOG_INFO() << QString("File %1 saved").arg(m_filePath);
 }
 
 void HPEMainWindow::onFileSaveAs()
@@ -406,6 +431,13 @@ void HPEMainWindow::onOpenTableDialog()
                 [this](const QString &res){ this->ui->markdownField->textCursor().insertText(res); });
     }
     m_tableDialog->exec();
+}
+
+void HPEMainWindow::onOpenAboutDialog()
+{
+    if(m_aboutDialog == nullptr)
+        m_aboutDialog = new HPEAboutDialog(this);
+    m_aboutDialog->exec();
 }
 
 void HPEMainWindow::onProcessFinished(const QString &/*res*/, HPEHexoController::COMMAND_TYPE type)
