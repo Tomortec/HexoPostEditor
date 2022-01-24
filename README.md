@@ -1,5 +1,5 @@
 # HexoPostEditor
-#### 版本 Verison 1.0.dev0 (developing)
+#### 版本 Verison 1.0.0
 一个更加便于Hexo博客撰写的编辑器。   
 A markdown editor for writing Hexo posts more conveniently.
 
