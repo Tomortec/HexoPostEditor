@@ -1,0 +1,44 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/index.html</file>
+        <file>resources/3rdParty/markdown.css</file>
+        <file>resources/style.qss</file>
+        <file>resources/3rdParty/marked.min.js</file>
+        <file>resources/3rdParty/highlight.min.css</file>
+        <file>resources/3rdParty/highlight.min.js</file>
+        <file>resources/codeDialog/codesRendering.html</file>
+        <file>resources/3rdParty/katex.min.js</file>
+        <file>resources/3rdParty/auto-render.min.js</file>
+        <file>resources/3rdParty/katex.min.css</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>resources/icons/ico_codes.png</file>
+        <file>resources/icons/ico_clear.png</file>
+        <file>resources/icons/ico_server.png</file>
+        <file>resources/icons/ico_generate.png</file>
+        <file>resources/icons/ico_deploy.png</file>
+        <file>resources/icons/ico_info.png</file>
+        <file>resources/icons/ico_list.png</file>
+        <file>resources/icons/ico_image.png</file>
+        <file>resources/icons/ico_link.png</file>
+        <file>resources/icons/ico_strike.png</file>
+        <file>resources/icons/ico_heading.png</file>
+        <file>resources/icons/ico_underline.png</file>
+        <file>resources/icons/ico_italic.png</file>
+        <file>resources/icons/ico_bold.png</file>
+        <file>resources/icons/ico_font.png</file>
+        <file>resources/icons/ico_quote.png</file>
+        <file>resources/icons/ico_table.png</file>
+        <file>resources/icons/ico_hRule.png</file>
+        <file>resources/icons/ico_unchecked.png</file>
+        <file>resources/icons/ico_checked.png</file>
+        <file>resources/icons/ico_arrow_up.png</file>
+        <file>resources/icons/ico_arrow_down.png</file>
+        <file>resources/icons/ico_open_file.png</file>
+        <file>resources/icons/ico_new_file.png</file>
+        <file>resources/icons/Icon-Tomortec.png</file>
+    </qresource>
+    <qresource prefix="/animation">
+        <file>resources/anim_processing.gif</file>
+    </qresource>
+</RCC>

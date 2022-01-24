@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codes rendering</title>
+
+    <link rel="stylesheet" href="../3rdParty/highlight.min.css">
+    <script src="../3rdParty/highlight.min.js"></script>
+    <script src="qrc:/qtwebchannel/qwebchannel.js"></script>
+</head>
+<body>
+    <style>
+
+        .blocks {
+            display: block;
+            width: 90%;
+            height: 100%;
+            margin: 0 auto;
+            margin-bottom: 15px;
+            border: 4px solid rgb(208, 208, 208);
+            border-radius: 8px;
+            padding: 4px;
+            font-size: 15px;
+            font-family: 'PingFang SC', 'Myriad Pro', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            outline: none;
+        }
+
+        [data-text]:empty:not(:focus):before {
+            content:attr(data-text);
+            font-weight: thin;
+            color: rgb(117, 117, 117);
+        }
+    </style>
+
+    <textarea id="getter" class="blocks" placeholder="CODES HERE"
+        style="resize: none;"
+    ></textarea>
+    <div id="placeholder" class="blocks" data-text="CODES"
+        style="white-space: pre-wrap; white-space: pre;"
+    ></div>
+
+    <script>
+
+        var language = "";
+
+        function resetEdit() {
+            document.getElementById("getter").value = "";
+            document.getElementById("placeholder").innerText = "";
+        }
+
+        function changeLanguage(lang) {
+            language = lang;
+        }
+
+        new QWebChannel(qt.webChannelTransport, function(channel) {
+            var codeObj = channel.objects.codeObj;
+            codeObj.changeLanguage.connect(changeLanguage);
+        });
+
+        document.getElementById("getter").addEventListener("input", function(e) {
+            let placeholder = document.getElementById("placeholder");
+            if(!language)
+                placeholder.innerHTML = hljs.highlightAuto(this.value).value;
+            else
+                placeholder.innerHTML = hljs.highlight(this.value, {
+                    "language": language,
+                    "ignoreIllegals": true
+                }).value;
+
+            new QWebChannel(qt.webChannelTransport, function(channel) {
+                var codeObj = channel.objects.codeObj;
+                codeObj.getCodesFromWebPage(document.getElementById("getter").value);
+                codeObj.resetEdit.connect(resetEdit);
+            });
+        });
+
+        document.getElementById("getter").addEventListener("keydown", function(e) {
+            if (e.key == "Tab") {
+                e.preventDefault();
+                var start = this.selectionStart;
+                var end = this.selectionEnd;
+
+                // set textarea value to: text before caret + tab + text after caret
+                this.value = this.value.substring(0, start) +
+                "\t" + this.value.substring(end);
+
+                // put caret at right position again
+                this.selectionStart =
+                this.selectionEnd = start + 1;
+            }
+        });
+
+    </script>
+
+</body>
+</html>

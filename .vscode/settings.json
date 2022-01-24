@@ -1,0 +1,26 @@
+{
+    "files.associations": {
+        "ios": "cpp"
+    },
+    "doxdocgen.generic.authorName": "Tomortec",
+    "doxdocgen.generic.authorEmail": "everything@tomortec.com",
+    "doxdocgen.file.copyrightTag": [
+        "@copyright Copyright © 2021 - {year} Tomortec."
+    ],
+    "doxdocgen.file.versionTag": "@version 1.0.0",
+    "doxdocgen.file.customTag": [
+        "@website https://tomortec.com", 
+        "@license GPL v3 (https://www.gnu.org/licenses/gpl-3.0.html)"
+    ],
+    "doxdocgen.c.lastLine": "*/",
+    "doxdocgen.file.fileOrder": [
+        "file",
+        "brief",
+        "version",
+        "date",
+        "empty",
+        "author",
+        "copyright",
+        "custom"
+    ]
+}
